@@ -1,6 +1,14 @@
-# User settings
-criterion # AIC, BIC
-num_initial_generation
-num_iterations
-num_crossover_breaks
-mutation_rate
+setwd("~/Copy/Berkeley/genetic-algo")
+# Test data
+# airquality$y <- airquality$Wind + 5*airquality$Temp + rnorm(nrow(airquality))
+# write.csv(airquality, "data/airquality.csv", row.names = F)
+airquality <- read.csv("data/airquality.csv")
+
+# reproduce
+### fitness: AIC_i/mean(all AICs)
+### select
+### crossover
+### mutate
+
+# summary
+# plot
