@@ -1,13 +1,13 @@
-#' Calculate model selection criterion.
+#' Do evaluation by calculating model selection criterion.
 #' 
-#' Calculate model selection criterion.
+#' Do evaluation by calculating model selection criterion.
 #' 
 #' @param model_data; Object of class \code{model_data}.
 #' @param xvars_select; Logical vector; 
 #' @param model; Character; "lm" (default) or "glm"; Linear model or generalized linear model.
 #' @param criterion; "AIC" (default) or "BIC"; AIC or BIC.
 #' @return Numeric; Value of criterion.
-criterion <- function(
+evaluate <- function(
   model_data,
   xvars_select,
   model = "lm",
@@ -35,6 +35,6 @@ criterion <- function(
 # Testing
 for (model in c("lm", "glm")) 
   for (criterion in c("AIC", "BIC"))
-    print(criterion(model_data = model_data, 
-                    xvars_select = as.logical(c(1, 0, 1, 0, 1, 1)),
-                    model = model, criterion = criterion))
+    print(evaluate(model_data = model_data, 
+                   xvars_select = as.logical(c(1, 0, 1, 0, 1, 1)),
+                   model = model, criterion = criterion))

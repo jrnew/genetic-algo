@@ -5,7 +5,6 @@ setwd("~/Copy/Berkeley/genetic-algo")
 airquality <- read.csv("data/airquality.csv")
 
 # reproduce
-### fitness: AIC_i/mean(all AICs)
 ### select
 ### crossover
 ### mutate
