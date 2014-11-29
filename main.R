@@ -4,10 +4,6 @@ setwd("~/Copy/Berkeley/genetic-algo")
 # write.csv(airquality, "data/airquality.csv", row.names = F)
 airquality <- read.csv("data/airquality.csv")
 
-# reproduce
-### select
-### crossover
-### mutate
 
 # summary
 # plot
