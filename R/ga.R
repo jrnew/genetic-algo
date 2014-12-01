@@ -51,7 +51,6 @@ ga <- function(
   ga <- list(settings = settings,
              model_data = model_data,
              pop = pop,
-             criterion = criterion,
              fitness = fitness,
              log = log)
   class(ga) <- "ga"
