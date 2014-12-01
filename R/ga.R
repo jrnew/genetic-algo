@@ -42,7 +42,7 @@ ga <- function(
                    elitism_rate = elitism_rate,
                    num_max_iterations = num_max_iterations,
                    seed = seed)
-  model_data <- data(data = data, yvar = yvar, xvars = xvars)
+  model_data <- process_data(data = data, yvar = yvar, xvars = xvars)
   pop <- initialize(pop_size = pop_size, num_vars = model_data$num_vars)
   log <- list(models = matrix(NA, nrow = num_max_iterations, 
                               ncol = model_data$num_vars),

@@ -14,7 +14,7 @@
 #'   set of explanatory variables to select on.}
 #'   \item{\code{num_vars}}{Integer; Length of xvars.}   
 #' } 
-data <- function(
+process_data <- function(
   data,
   yvar,
   xvars = NULL
@@ -43,7 +43,6 @@ data <- function(
 # Categorical variables?
 
 # Testing
-# data <- read.csv("data/airquality.csv", header = TRUE)
-# yvar <- "y"
-# model_data <- data(data = data, yvar = yvar)
-
+data <- read.csv("data/airquality.csv", header = TRUE)
+yvar <- "y"
+model_data <- process_data(data = data, yvar = yvar)
