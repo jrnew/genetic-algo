@@ -10,12 +10,13 @@ initialize <- function(
   pop_size,
   num_vars
 ) {
-  return(matrix(sample(c(0, 1), size = pop_size*num_vars,
+  pop <- matrix(sample(c(0, 1), size = pop_size*num_vars,
                        replace = TRUE),
                 nrow = pop_size,
-                ncol = num_vars))
+                ncol = num_vars)
+  return(pop)
 }
 
 # Testing
-initialize(pop_size = 1000,
-           num_vars = 10)
+# initialize(pop_size = 1000,
+#            num_vars = 10)

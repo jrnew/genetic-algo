@@ -1,0 +1,26 @@
+Pending issues
+----------------------------------------------------------------------
+- Test with more data sets and check that ga function is working as expected
+- Check that function arguments are all valid, use asserthat?
+- select: ### Fix for minimization for DS and SRS. Lower AIC/BIC better and negative values possible. 
+  How to calculate fitness when we have evaluation/mean(evaluation)??
+- select: WARNING: All method_select other than LRS do not work at the moment!
+- summary.ga function
+- plot.ga function
+- select: mating_pool_size = pop_size? Yes for now. 
+- recombine: Two parents produce one child or two children? One child for now.
+- recombine: Check that crossover technique is sound for onepoint and twopoint.
+- seeds for parallel runs?
+- Drop all the for loops, just use foreach but not register parallel backend
+  if do_parallel is FALSE?
+
+Notes
+----------------------------------------------------------------------
+- Note to Hu Yang: I allowed for chromosomes with all 0s, i.e. model with intercept only.
+
+References
+----------------------------------------------------------------------
+Selection:
+http://www.ijest.info/docs/IJEST11-03-05-190.pdf
+http://www.iaeng.org/publication/WCE2011/WCE2011_pp1134-1139.pdf
+http://www.phy.ornl.gov/csep/mo/node42.html (ideal parameters)

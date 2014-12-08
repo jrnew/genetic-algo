@@ -1,6 +1,6 @@
-#' Initialize first generation of chromosomes.
+#' Process data for input into genetic algorithm.
 #' 
-#' Initialize first generation of chromosomes.
+#' Process data for input into genetic algorithm.
 #' 
 #' @param data Data frame
 #' @param yvar Character; Name of column containing response variable.
@@ -38,11 +38,7 @@ process_data <- function(
   return(model_data)
 }
 
-# Issues
-# NA values?
-# Categorical variables?
-
 # Testing
-data <- read.csv("data/airquality.csv", header = TRUE)
-yvar <- "y"
-model_data <- process_data(data = data, yvar = yvar)
+# data <- read.csv("data/airquality.csv", header = TRUE)
+# yvar <- "y"
+# model_data <- process_data(data = data, yvar = yvar)
