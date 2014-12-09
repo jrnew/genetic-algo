@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
 Pending issues
 ----------------------------------------------------------------------
-- seeds for parallel runs? (JR)
+- seeds for parallel runs? (JR) 
 - Drop all the for loops, just use foreach but not register parallel backend
   if do_parallel is FALSE? (JR)
 References

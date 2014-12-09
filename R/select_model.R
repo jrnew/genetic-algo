@@ -6,9 +6,13 @@
 #' @param yvar Character; Name of column containing response variable
 #' @param xvars Character vector; Default is all column names that are not yvar;
 #' Name(s) of column(s) containing set of explanatory variables to select on.
-#' @param model; Character; "lm" (default) or "glm"; Linear model or 
+#' @param model Character; "lm" (default) or "glm"; Linear model or 
 #' generalized linear model.
-#' @param criterion; "AIC" (default) or "BIC"; Criterion to be minimized.
+#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
+#' "quasibinomial", "quasipoisson"; A family function that gives the error 
+#' distribution and link function to be used in the model.
+#' @param criterion "AIC" (default) or "BIC"; Criterion to be minimized.
 #' @param pop_size Integer; Default is 100; Number of chromosomes per generation.
 #' @param method_select String; "rank" (linear rank selection) (default) or
 #' "tournament"; Method to select chromosomes for inclusion in mating pool.
@@ -51,11 +55,19 @@ select_model <- function(
   stopifnot(is.integer(num_max_iterations))
   stopifnot(num_max_iterations >= 10)
   stopifnot(is.logical(do_parallel))
+  if (model == "glm") {
+    stopifnot(!is.null(glm_family))
+    stopifnot(is.character(glm_family))
+    stopifnot(glm_family %in%
+                c("binomial", "gaussian", "Gamma", "inverse.gaussian",
+                  "poisson", "quasi", "quasibinomial", "quasipoisson"))
+  }
   
   set.seed(seed)
   if (do_parallel)
     registerDoParallel(cores = detectCores())
   settings <- list(model = model,
+                   glm_family = glm_family,
                    criterion = criterion,
                    pop_size = pop_size,
                    method_select = method_select,
@@ -65,6 +77,7 @@ select_model <- function(
                    num_max_iterations = num_max_iterations,
                    seed = seed)
   model_data <- process_data(data = data, yvar = yvar, xvars = xvars)
+  class(model_data) <- "model_data"
   cat(paste0("Initializing population...\n"))
   pop <- initialize(pop_size = pop_size, num_vars = model_data$num_vars)
   log <- list(models = matrix(NA, nrow = num_max_iterations, 

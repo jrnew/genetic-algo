@@ -20,8 +20,7 @@ process_data <- function(
   xvars = NULL
 ) {
   vars_all <- colnames(data)
-  
-  stopifnot(yvar in vars_all)
+  stopifnot(yvar %in% vars_all)
   if (!is.null(xvars)) {
     stopifnot(is.character(xvars))
   }

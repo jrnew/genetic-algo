@@ -3,10 +3,14 @@
 #' Do evaluation for chromosomes in population by calculating model selection criterion.
 #' 
 #' @param pop Matrix of population of chromosomes.
-#' @param model_data; Object of class \code{model_data}.
-#' @param model; Character; "lm" (default) or "glm"; Linear model or 
+#' @param model_data Object of class \code{model_data}.
+#' @param model Character; "lm" (default) or "glm"; Linear model or 
 #' generalized linear model.
-#' @param criterion; "AIC" (default) or "BIC"; Criterion to be minimized.
+#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
+#' "quasibinomial", "quasipoisson"; A family function that gives the error 
+#' distribution and link function to be used in the model.
+#' @param criterion "AIC" (default) or "BIC"; Criterion to be minimized.
 #' @param do_parallel Logical; Default \code{FALSE}; Do in parallel?
 #' @return Numeric vector; Evaluation values for all chromosomes 
 #' in the current generation.
@@ -14,6 +18,7 @@ evaluate <- function(
   pop,
   model_data,
   model = "lm",
+  glm_family = NULL,
   criterion = "AIC",
   do_parallel = FALSE
 ) {
@@ -23,6 +28,13 @@ evaluate <- function(
   stopifnot(model %in% c("lm", "glm"))
   stopifnot(criterion %in% c("AIC", "BIC"))
   stopifnot(is.logical(do_parallel))
+  if (model == "glm") {
+    stopifnot(!is.null(glm_family))
+    stopifnot(is.character(glm_family))
+    stopifnot(glm_family %in%
+                c("binomial", "gaussian", "Gamma", "inverse.gaussian",
+                  "poisson", "quasi", "quasibinomial", "quasipoisson"))
+  }
   
   if (do_parallel) {
     evaluation <- foreach (i = 1:nrow(pop), .combine = c) %dopar%
@@ -46,16 +58,28 @@ evaluate <- function(
 #' @param model_data; Object of class \code{model_data}.
 #' @param xvars_select; Logical vector; 
 #' @param model; Character; "lm" (default) or "glm"; Linear model or generalized linear model.
+#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
+#' "quasibinomial", "quasipoisson"; A family function that gives the error 
+#' distribution and link function to be used in the model.
 #' @param criterion; "AIC" (default) or "BIC"; AIC or BIC.
 #' @return Numeric; Value of criterion.
 evaluate_once <- function(
   model_data,
   xvars_select,
   model = "lm",
+  glm_family = NULL,
   criterion = "AIC"
 ) {
   stopifnot(model %in% c("lm", "glm"))
   stopifnot(criterion %in% c("AIC", "BIC"))
+  if (model == "glm") {
+    stopifnot(!is.null(glm_family))
+    stopifnot(is.character(glm_family))
+    stopifnot(glm_family %in%
+                c("binomial", "gaussian", "Gamma", "inverse.gaussian",
+                  "poisson", "quasi", "quasibinomial", "quasipoisson"))
+  }
   
   mod_formula <- as.formula(paste(
     model_data$yvar, "~", 
@@ -64,7 +88,7 @@ evaluate_once <- function(
   if (model == "lm") {
     mod <- lm(mod_formula, data = model_data$data)
   } else if (model == "glm") {
-    mod <- glm(mod_formula, family = "gaussian", data = model_data$data)
+    mod <- glm(mod_formula, family = glm_family, data = model_data$data)
   }
   if (criterion == "AIC") {
     result <- AIC(mod)
@@ -73,11 +97,3 @@ evaluate_once <- function(
   }
   return(result)
 }
-
-# Testing
-# for (model in c("lm", "glm")) 
-#   for (criterion in c("AIC", "BIC"))
-#     print(evaluate_once(model_data = model_data, 
-#                         xvars_select = as.logical(c(1, 0, 1, 0, 1, 1)),
-#                         model = model, criterion = criterion))
-

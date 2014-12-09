@@ -36,6 +36,7 @@ reproduce <- function(
   evaluation_child <- evaluate(pop = ga$pop,
                                model_data = ga$model_data,
                                model = ga$settings$model,
+                               glm_family = ga$settings$glm_family,
                                criterion = ga$settings$criterion,
                                do_parallel = do_parallel)
   ga$evaluation <- evaluation_child
