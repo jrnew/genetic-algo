@@ -10,10 +10,8 @@
 #' generalized linear model.
 #' @param criterion; "AIC" (default) or "BIC"; Criterion to be minimized.
 #' @param pop_size Integer; Default is 100; Number of chromosomes per generation.
-#' @param method_select String; "LRS" (linear rank selection) (default), 
-#' "RWS" (roulette wheel selection), "DS" (deterministic sampling), 
-#' "SRS" (stochastic remainder sampling) or "SUS" (stochastic universal selection);
-#' Method to select chromosomes for inclusion in mating pool.
+#' @param method_select String; "rank" (linear rank selection) (default) or
+#' "tournament"; Method to select chromosomes for inclusion in mating pool.
 #' @param method_recombine String; "onepoint" (default), "twopoint", "uniform"; 
 #' Type of crossover, at one point, at two points or uniformly (at all possible points).
 #' @param prob_recombine Numeric, between 0 and 1; Default is 0.6; 
@@ -34,7 +32,7 @@ ga <- function(
   model = "lm",
   criterion = "AIC",
   pop_size = 100L,
-  method_select = "LRS",
+  method_select = "rank",
   method_recombine = "onepoint",
   prob_recombine = 0.6,
   prob_mutate = 0.01,

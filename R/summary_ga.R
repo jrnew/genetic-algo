@@ -1,8 +1,9 @@
-#' Function to summerize the result from the genetic algorithim
+#' Summarize results from the genetic algorithim.
 #' 
-#' Provides the top 5 fit for the linear model.
+#' Outputs the top 5 models selected from the genetic algorithm.
+#' 
 #' @param ga Object of class \code{ga}.
-#' @return Dataframe containning the linear combinations with small AIC
+#' @return Data frame containing the linear combinations with small AIC
 #' and their corresponding AIC 
 
 summary.ga <- function(ga_result)
