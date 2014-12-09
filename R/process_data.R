@@ -20,6 +20,12 @@ process_data <- function(
   xvars = NULL
 ) {
   vars_all <- colnames(data)
+  
+  stopifnot(yvar in vars_all)
+  if (!is.null(xvars)) {
+    stopifnot(is.character(xvars))
+  }
+  
   vars <- vars_all[!(vars_all %in% yvar)]
   # If xvars is NULL, set xvars = vars, else check that all
   # xvars can be found in column names of data.
@@ -30,6 +36,7 @@ process_data <- function(
                "any column names in data:",
                xvars[!(xvars %in% vars)], collapse = ", "))
   }
+  stopifnot(length(xvars) > 1)
   data_proc <- subset(data, select = c(yvar, xvars))
   model_data <- list(data = data_proc,
                      yvar = yvar,
@@ -38,7 +45,3 @@ process_data <- function(
   return(model_data)
 }
 
-# Testing
-# data <- read.csv("data/airquality.csv", header = TRUE)
-# yvar <- "y"
-# model_data <- process_data(data = data, yvar = yvar)

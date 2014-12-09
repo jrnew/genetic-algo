@@ -4,12 +4,6 @@ Pending issues
 - seeds for parallel runs? (JR)
 - Drop all the for loops, just use foreach but not register parallel backend
   if do_parallel is FALSE? (JR)
-----------------------------------------------------------------------
-Queries
-----------------------------------------------------------------------
-- select: mating_pool_size = pop_size? Yes for now. 
-- recombine: Two parents produce one child or two children? One child for now.
-
 References
 ----------------------------------------------------------------------
 Selection:
