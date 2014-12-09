@@ -1,6 +1,7 @@
 ----------------------------------------------------------------------
 Pending issues
 ----------------------------------------------------------------------
+- Update summary function (Hu Yang)
 - seeds for parallel runs? (JR) 
 - Drop all the for loops, just use foreach but not register parallel backend
   if do_parallel is FALSE? (JR)

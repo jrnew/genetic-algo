@@ -6,10 +6,12 @@
 #' @param num_view Number of top models to display.
 #' @return Prints summary of top models and associated value of 
 #' model selection criterion.
-summary_ga <- function(
+summary.ga <- function(
   ga, 
   num_view = 5
 ) {
+  stopifnot(class(ga) == "ga")
+  
   rank <- order(ga$log$evaluation_best)
   top <- ga$log$models[rank, ][1:num_view, ]
   score <- sort(ga$log$evaluation_best)[1:num_view]

@@ -32,6 +32,7 @@ select_model <- function(
   yvar,
   xvars = NULL,
   model = "lm",
+  glm_family = NULL,
   criterion = "AIC",
   pop_size = 100L,
   method_select = "rank",

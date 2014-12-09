@@ -20,6 +20,7 @@ system.time({
                      yvar = "y",
                      xvars = NULL,
                      model = "lm",
+                     glm_family = NULL,
                      criterion = "AIC",
                      pop_size = 100L,
                      method_select = "rank",
@@ -33,12 +34,16 @@ system.time({
   ga$log$models[ga$log$evaluation_best == min(ga$log$evaluation_best), ]
 })
 
+# summary
+summary(ga)
+# plot
+plot(ga)
+
 # Check using stepAIC
 # mod <- lm(y ~ ., data)
 # library(MASS)
 # stepAIC(mod)
 # stepAIC(mod, k = log(n)) # BIC
 
-# summary
-summary_ga(ga)
-# plot
+
+

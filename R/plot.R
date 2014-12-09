@@ -7,11 +7,11 @@
 #' @param num_view Number of top models to display.
 #' @return Prints summary of top models and associated value of 
 #' model selection criterion.
-plot_ga <- function(
+plot.ga <- function(
   ga,
   num_view = 3
 ) {
-  stopifnot(class(ga) == ga)
+  stopifnot(class(ga) == "ga")
   stopifnot(is.integer(num_view))
   
   generation <- 1:ga$settings$num_max_iterations
