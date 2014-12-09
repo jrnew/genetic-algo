@@ -18,14 +18,12 @@
 #' Probability of recombination.
 #' @param prob_mutate Numeric, between 0 and 1; Default is 0.01; 
 #' Probability of mutation.
-#' @param elitism_rate Numeric, between 0 and 1; Default is 0.2; 
-#' Proportion of chromosomes that are replaced at iteration.
 #' @param num_max_iterations Non-negative integer; Default is 100; 
 #' Maximum number of iterations before algorithm is stopped.
 #' @param seed Non-negative integer; Default is 123; Random seed 
 #' for reproducibility.
 #' @param do_parallel Logical; Default is \code{FALSE}; Do in parallel?
-ga <- function(
+select_model <- function(
   data,
   yvar,
   xvars = NULL,
@@ -36,12 +34,27 @@ ga <- function(
   method_recombine = "onepoint",
   prob_recombine = 0.6,
   prob_mutate = 0.01,
-  elitism_rate = 0.2,
   num_max_iterations = 100L,
   seed = 123,
   do_parallel = FALSE
 ) {
+  stopifnot(is.data.frame(data))
+  stopifnot(model %in% c("lm", "glm"))
+  stopifnot(criterion %in% c("AIC", "BIC"))
+  stopifnot(is.integer(pop_size))
+  stopifnot(method_select %in% c("rank", "tournament"))
+  stopifnot(method_recombine %in% c("onepoint", "twopoint", "uniform"))
+  stopifnot(is.numeric(prob_mutate))
+  stopifnot(prob_mutate >= 0 & prob_mutate <= 1)
+  stopifnot(is.numeric(prob_recombine))
+  stopifnot(prob_recombine >= 0 & prob_recombine <= 1)
+  stopifnot(is.integer(num_max_iterations))
+  stopifnot(num_max_iterations >= 10)
+  stopifnot(is.logical(do_parallel))
+  
   set.seed(seed)
+  if (do_parallel)
+    registerDoParallel(cores = detectCores())
   settings <- list(model = model,
                    criterion = criterion,
                    pop_size = pop_size,
@@ -49,10 +62,10 @@ ga <- function(
                    method_recombine = method_recombine,
                    prob_recombine = prob_recombine,
                    prob_mutate = prob_mutate,
-                   elitism_rate = elitism_rate,
                    num_max_iterations = num_max_iterations,
                    seed = seed)
   model_data <- process_data(data = data, yvar = yvar, xvars = xvars)
+  cat(paste0("Initializing population...\n"))
   pop <- initialize(pop_size = pop_size, num_vars = model_data$num_vars)
   log <- list(models = matrix(NA, nrow = num_max_iterations, 
                               ncol = model_data$num_vars),
@@ -69,14 +82,12 @@ ga <- function(
              evaluation = evaluation,
              log = log)
   class(ga) <- "ga"
-  iteration <- 1
+  iteration <- 1L
   while (iteration <= num_max_iterations) {
+    cat(paste0("Producing generation ", iteration, "...\n"))
     ga <- reproduce(ga = ga, iteration = iteration, do_parallel = do_parallel)
-    cat(paste0("At generation", iteration, "..."))
-    # print(ga$log$models[iteration, ])
-    # print(ga$log$evaluation_best[iteration])
-    # print("#--------------------------------------------------#")
-    iteration <- iteration + 1
+    iteration <- iteration + 1L
   }
+  cat("Model selection complete!\n")
   return(ga)
 }

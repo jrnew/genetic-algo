@@ -14,6 +14,13 @@ select <- function(
   method = "rank",
   do_parallel = FALSE
 ) {
+  stopifnot(is.matrix(pop))
+  stopifnot(all(c(pop) %in% c(0, 1)))
+  stopifnot(is.vector(evaluation))
+  stopifnot(is.numeric(evaluation))
+  stopifnot(method %in% c("rank", "tournament"))
+  stopifnot(is.logical(do_parallel))
+  
   mating_pool_size <- nrow(pop)
   indices_select <- rep(NA, mating_pool_size)
   if (method  == "rank") {

@@ -1,12 +1,6 @@
 ----------------------------------------------------------------------
 Pending issues
 ----------------------------------------------------------------------
-- Test with more data sets and check that ga function is working as expected
-- Check that function arguments are all valid, use asserthat?
-- summary.ga function
-- plot.ga function
-- recombine: Check that crossover technique is sound for onepoint and twopoint.
-- Finish coding up parallelisation (JR)
 - seeds for parallel runs? (JR)
 - Drop all the for loops, just use foreach but not register parallel backend
   if do_parallel is FALSE? (JR)
@@ -15,11 +9,6 @@ Queries
 ----------------------------------------------------------------------
 - select: mating_pool_size = pop_size? Yes for now. 
 - recombine: Two parents produce one child or two children? One child for now.
-
-----------------------------------------------------------------------
-Notes
-----------------------------------------------------------------------
-- Note to Hu Yang: I allowed for chromosomes with all 0s, i.e. model with intercept only.
 
 References
 ----------------------------------------------------------------------

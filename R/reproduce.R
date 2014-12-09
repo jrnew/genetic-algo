@@ -10,6 +10,11 @@ reproduce <- function(
   iteration,
   do_parallel = FALSE
 ) {
+  stopifnot(class(ga) == "ga")
+  stopifnot(is.integer(iteration))
+  stopifnot(iteration > 0)
+  stopifnot(is.logical(do_parallel))
+  
   # Create mating pool
   pop_mating <- select(pop = ga$pop, 
                        evaluation = ga$evaluation,
@@ -24,19 +29,6 @@ reproduce <- function(
   # Carry out mutation
   pop_mutated <- mutate(pop = pop_recombined, 
                         prob_mutate = ga$settings$prob_mutate)
-  #----------------------------------------------------------------------
-#   # Replace parent chromosomes with child chromosomes
-#   pop_child <- pop_mutated ############## combine with parents or replace?
-#   #Elitism
-#   elitism_num <- ceiling(nrow(parents)*ga_list$settings$elitism_rate)
-#   sample_parents <- parents[1:elitism_num,]
-#   index <- sample(1:nrow(children), size = (pop_size-elitism_num), replace = TRUE)
-#   sample_children <- children[index,]  
-#   
-#   #update current list
-#   #pop
-#   ga_list$pop <- rbind(sample_parents,sample_children)
-#   ga$pop <- pop_child
   #----------------------------------------------------------------------
   # Replace entire generation with child chromosomes
   ga$pop <- pop_mutated

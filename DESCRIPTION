@@ -1,0 +1,13 @@
+Package: ga
+Maintainer: EHYHJRN <ga@stat.berkeley.edu>
+Author: Eddie Buehler, Yang Hu, Jin Rou New
+Version: 1.0
+License: GPL (>= 2)
+Date: 2014-12-09
+Title: Model selection with genetic algorithms.
+Description: Ordinarly or generalized linear model selection with genetic
+    algorithms.
+Depends:
+    R (>= 2.14.2),
+    doParallel,
+    foreach

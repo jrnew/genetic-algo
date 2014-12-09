@@ -15,9 +15,15 @@ evaluate <- function(
   model_data,
   model = "lm",
   criterion = "AIC",
-  method = "value",
   do_parallel = FALSE
 ) {
+  stopifnot(is.matrix(pop))
+  stopifnot(all(c(pop) %in% c(0, 1)))
+  stopifnot(is.list(model_data))
+  stopifnot(model %in% c("lm", "glm"))
+  stopifnot(criterion %in% c("AIC", "BIC"))
+  stopifnot(is.logical(do_parallel))
+  
   if (do_parallel) {
     evaluation <- foreach (i = 1:nrow(pop), .combine = c) %dopar%
       evaluate_once(model_data = model_data, 
@@ -48,18 +54,21 @@ evaluate_once <- function(
   model = "lm",
   criterion = "AIC"
 ) {
+  stopifnot(model %in% c("lm", "glm"))
+  stopifnot(criterion %in% c("AIC", "BIC"))
+  
   mod_formula <- as.formula(paste(
     model_data$yvar, "~", 
     ifelse(sum(xvars_select) == 0, 1,
            paste(model_data$xvars[xvars_select], collapse = " + "))))
   if (model == "lm") {
     mod <- lm(mod_formula, data = model_data$data)
-  } else {
+  } else if (model == "glm") {
     mod <- glm(mod_formula, family = "gaussian", data = model_data$data)
   }
   if (criterion == "AIC") {
     result <- AIC(mod)
-  } else {
+  } else if (criterion == "BIC") {
     result <- BIC(mod)
   }
   return(result)
