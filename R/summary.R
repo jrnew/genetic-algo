@@ -23,9 +23,13 @@ summary.ga <- function(
     top_models <- models[rank, ][1:num_view, ]
     top_evaluation <- sort(evaluation)[1:num_view]
     for (i in 1:num_view) {
-      x <- ga$model_data$xvars[top_models[i] == 1]
+      if (all(top_models[i, ] == 0)) {
+        xvars <- "Intercept"
+      } else {
+        x <- ga$model_data$xvars[top_models[i, ] == 1]
+        xvars <- paste(x, collapse = " + ")
+      }
       y <- ga$model_data$yvar
-      xvars <- paste(x, collapse = " + ")
       cat("Model", i, ":\n",
           paste(c(y, xvars), collapse = " = "), "\n",
           ga$settings$criterion, "=", top_evaluation[i], "\n",
