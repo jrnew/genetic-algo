@@ -31,11 +31,17 @@ summary.ga <- function(
       }
       y <- ga$model_data$yvar
       cat("Model", i, ":\n",
-          paste(c(y, xvars), collapse = " = "), "\n",
+          paste(c(y, xvars), collapse = " ~ "), "\n",
           ga$settings$criterion, "=", top_evaluation[i], "\n",
           "--------------------------------------------------\n")
+      if (i == 1) {
+        res <- list(formula = paste(c(y, xvars), collapse = " ~ "), 
+                    xvars = x,
+                    chromosome = top_models[i, ], 
+                    evaluation = top_evaluation[i])
+      }
     }
   }
-  return(invisible())
+  return(res)
 }
 

@@ -35,7 +35,7 @@ evaluate <- function(
   }
   stopifnot(is.logical(do_parallel))
   if (model == "glm") {
-    stopifnot(is.null(glm_family))
+    stopifnot(!is.null(glm_family))
     stopifnot(is.character(glm_family))
     stopifnot(glm_family %in%
                 c("binomial", "gaussian", "Gamma", "inverse.gaussian",
@@ -45,14 +45,16 @@ evaluate <- function(
     evaluation <- foreach (i = 1:nrow(pop), .combine = c) %dopar%
       evaluate_once(model_data = model_data, 
                     xvars_select = as.logical(pop[i, ]),
-                    model = model, criterion = criterion, 
+                    model = model, glm_family = glm_family,
+                    criterion = criterion, 
                     criterion_function = criterion_function)
   } else {
     evaluation <- rep(NA, nrow(pop))
     for (i in 1:nrow(pop))
       evaluation[i] <- evaluate_once(model_data = model_data, 
                                      xvars_select = as.logical(pop[i, ]),
-                                     model = model, criterion = criterion,
+                                     model = model, glm_family = glm_family,
+                                     criterion = criterion,
                                      criterion_function = criterion_function)
   }  
   return(evaluation)
@@ -87,7 +89,7 @@ evaluate_once <- function(
     stopifnot(is.function(criterion_function))
   }
   if (model == "glm") {
-    stopifnot(is.null(glm_family))
+    stopifnot(!is.null(glm_family))
     stopifnot(is.character(glm_family))
     stopifnot(glm_family %in%
                 c("binomial", "gaussian", "Gamma", "inverse.gaussian",

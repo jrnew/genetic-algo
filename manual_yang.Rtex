@@ -8,7 +8,7 @@ opts_chunk$set(fig.path='figure/latex-', cache.path='cache/latex-')
 # Load all functions in R folder
 Rfiles <- list.files(file.path(getwd(), "R"))
 Rfiles <- Rfiles[grepl(".R", Rfiles)]
-sapply(paste0("R/", Rfiles), source)
+sapply(paste0("../R/", Rfiles), source)
 %% end.rcode
 
 \begin{document}
@@ -31,26 +31,30 @@ location of XXX (where)
 
 The following results are obtained using our genetic algorithim.
 
-%% begin.rcode 
-data <- read.table("data/video.txt", header = TRUE, quote = "\"")
+%% begin.rcode, cache = TRUE, results = "hide"
+data <- read.table("../data/video.txt", header = TRUE, quote = "\"")
 ga <- select_model(data, 
                    yvar = "grade",
                    pop_size = nrow(data)*2,
                    num_max_iterations = 50, 
                    model = "glm",
                    glm_family = "gaussian")
-res <- summary(ga, num_view = 3)
+%% end.rcode
+
+%% begin.rcode, cache = TRUE
+res <- summary(ga)
 %% end.rcode 
 
 The following results are obtained using the \texttt{stepAIC} function.
 
-%% begin.rcode
+%% begin.rcode, cache = TRUE, 
 library(MASS)
 mod <- glm(grade ~ ., data = data) 
 res_step <- stepAIC(mod)
 %% end.rcode
 
-The best model found using genetic algorithim was: \rinline{res$formula}, 
+The best model found using genetic algorithim was: y $\sim$
+\rinline{paste(res$xvars, collapse = " + ")}, 
 with an AIC of \rinline{round(res$evaluation, digits = 2)}. This result 
 is better than that of \rinline{round(res_step$aic, digits = 2)} that
 we obtained using the \texttt{stepAIC} function. 
@@ -58,7 +62,8 @@ we obtained using the \texttt{stepAIC} function.
 Finally, we plotted the best AIC for each generation to see how the best AIC 
 has changed over generations. 
 
-%% begin.rcode, fig.width = 4, fig.height = 4
+%% begin.rcode, cache = TRUE, fig.width = 3, fig.height = 3
+par(cex = 0.8)
 plot(ga)
 %% end.rcode
 

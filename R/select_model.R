@@ -19,7 +19,7 @@
 #' @param pop_size Integer; Default is 100; Number of chromosomes per generation.
 #' @param method_select String; "rank" (linear rank selection) (default) or
 #' "tournament"; Method to select chromosomes for inclusion in mating pool.
-#' @param method_recombine String; "onepoint" (default), "twopoint", "uniform"; 
+#' @param method_recombine String; "onepoint", "twopoint", "uniform" (default); 
 #' Type of crossover, at one point, at two points or uniformly (at all possible points).
 #' @param prob_recombine Numeric, between 0 and 1; Default is 0.6; 
 #' Probability of recombination.
@@ -40,7 +40,7 @@ select_model <- function(
   criterion_function = NULL,
   pop_size = 100L,
   method_select = "rank",
-  method_recombine = "onepoint",
+  method_recombine = "uniform",
   prob_recombine = 0.6,
   prob_mutate = 0.01,
   num_max_iterations = 100L,
@@ -63,7 +63,7 @@ select_model <- function(
   stopifnot(num_max_iterations >= 10)
   stopifnot(is.logical(do_parallel))
   if (model == "glm") {
-    stopifnot(is.null(glm_family))
+    stopifnot(!is.null(glm_family))
     stopifnot(is.character(glm_family))
     stopifnot(glm_family %in%
                 c("binomial", "gaussian", "Gamma", "inverse.gaussian",
@@ -95,6 +95,7 @@ select_model <- function(
   evaluation <- evaluate(pop = pop,
                          model_data = model_data,
                          model = settings$model,
+                         glm_family = settings$glm_family,
                          criterion = settings$criterion,
                          criterion_function = settings$criterion_function,
                          do_parallel = do_parallel)

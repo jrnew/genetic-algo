@@ -4,7 +4,7 @@
 #' 
 #' @param pop_mating Matrix of population of chromosomes that form the mating pool.
 #' @param pop_size Integer; Number of chromosomes in a generation.
-#' @param method String; "onepoint" (default), "twopoint", "uniform"; 
+#' @param method String; "onepoint", "twopoint", "uniform" (default); 
 #' Type of crossover, at one point, at two points or uniformly (at all possible points).
 #' @param prob_recombine Numeric, between 0 and 1; Default is 0.6; 
 #' Probability of recombination.
@@ -13,7 +13,7 @@
 recombine <- function(
   pop_mating,
   pop_size,
-  method = "onepoint",
+  method = "uniform",
   prob_recombine = 0.6,
   do_parallel = FALSE
 ) {
@@ -59,13 +59,13 @@ recombine <- function(
 #' 
 #' @param parent1 Integer vector of 1st parent chromosome containing 1's and 0's.
 #' @param parent2 Integer vector of 2nd parent chromosome containing 1's and 0's.
-#' @param method String; "onepoint" (default), "twopoint", "uniform"; 
+#' @param method String; "onepoint", "twopoint", "uniform" (default); 
 #' Type of crossover, at one point, at two points or uniformly (at all possible points).
 #' @return Integer vector of child chromosome containing 1's and 0's.
 recombine_once <- function(
   parent1,
   parent2,
-  method = "onepoint"
+  method = "uniform"
 ) {
   if (all(parent1 == parent2)) {
     # Crossover not necessary (has no effect) if both parents are identical
