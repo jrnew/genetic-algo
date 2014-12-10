@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx}
+%% for inline R code: if the inline code is not correctly parsed, you will see a message
+\newcommand{\rinline}[1]{SOMETHING WRONG WITH knitr}
+%% begin.rcode setup, include=FALSE
+% library(knitr)
+% opts_chunk$set(fig.path='figure/latex-', cache.path='cache/latex-')
+%% end.rcode
+\begin{document}
+
+\section{Test}
+We have implented testing functions for each method to ensure that each 
+function takes proper inputs and returns desired outputs. Each method 
+functions properly when tested using small data sets. In order to test the 
+functionality of our genetic algorithm, we employed a real-life data set. We 
+would like to compare out selected model using genetic algorithim with a 
+well-known variable selection mechanism. In our tests, we used stepAIC function. 
+
+
+The real-life data set was obtained from surveys concerning how video games 
+affect grades. There are 15 columns in the data set and grade will be used as  
+the dependent variable.
+
+
+First, we compared our selected model with the model seletced by stepAIC.
+The following results are obtained using our genetic algorithim.
+
+%% begin.rcode 
+data <- read.table("~/video.txt", header=TRUE, quote="\"")
+pop_size <- min(nrow(data)*2, 200)
+ga <- select_model(data, 
+                   yvar = "grade", 
+                   xvars = c("time", "like", "where", "freq", "busy","educ",
+                             "sex", "age", "home", "math", "work", "own",
+                             "cdrom", "email"),
+                   num_max_iterations = 35L, 
+                   model = "glm",
+                   seed = 100)
+summary_ga(ga, num_view = 3)
+%% end.rcode 
+
+
+The following results are obtained using stepAIC function.
+
+%% begin.rcode
+library(MASS)
+mod <- glm(grade ~ time + like + where + freq + busy + educ + sex + age + 
+            home + math + work + own + cdrom + email, data = data) 
+stepAIC(mod)
+%% end.rcode
+
+The best model found using genetic algorithim included predictors "where",  
+"freq","busy", "sex", "home" and "math", yielding AIC of 157.56. This result 
+is better than the results we obtained using the stepAIC function. 
+
+Second, we ploted the best AIC for each iteration to see how the AIC score 
+has changed over generation. 
+
+%%begin.rcode
+plot.ga(ga, num_view = 3)
+%% end.rcode
+
+From the box plot, we can see that the AIC ranges from 155 to 165. 
+From the Evolution of best model through generations plot, we can see that 
+the best model was found around generation 30. 
+
+\end{document}
