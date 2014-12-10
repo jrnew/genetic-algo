@@ -9,7 +9,7 @@ library(tools)
 dir.create("documentation/texforfunctions", showWarnings = FALSE,
            recursive = TRUE)
 functionnames <- list.files("ga-package/man")
-functionnames <- functionnames[!grepl("Rd", functionnames)]
+functionnames <- functionnames[grepl("Rd", functionnames)]
 functionnames <- gsub("\\.Rd", "", functionnames)
 for (functionname in functionnames)
   Rd2latex(paste0("ga-package/man/", functionname, ".Rd"), 
@@ -18,6 +18,6 @@ for (functionname in functionnames)
 
 # Get tex file that inputs all functions
 temp <- c("ga-package", "select_model")
-cat(paste0("\\input{documentation/texforfunctions/", 
-           c(temp, functionnames[!(functionnames %in% temp)], ".tex} \n")), 
+cat(paste0("\\input{texforfunctions/", 
+           c(temp, functionnames[!(functionnames %in% temp)]), ".tex} \n"), 
     file = paste("documentation/overviewallfunctions.tex"))
