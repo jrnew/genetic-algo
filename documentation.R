@@ -8,9 +8,11 @@
 library(tools)
 dir.create("documentation/texforfunctions", showWarnings = FALSE,
            recursive = TRUE)
-functionnames <- gsub("\\.Rd", "", list.files("man"))
+functionnames <- list.files("ga-package/man")
+functionnames <- functionnames[!grepl("Rd", functionnames)]
+functionnames <- gsub("\\.Rd", "", functionnames)
 for (functionname in functionnames)
-  Rd2latex(paste0("man/", functionname, ".Rd"), 
+  Rd2latex(paste0("ga-package/man/", functionname, ".Rd"), 
            out = paste0("documentation/texforfunctions/", functionname, ".tex"), 
            outputEncoding = "UTF-8")
 
