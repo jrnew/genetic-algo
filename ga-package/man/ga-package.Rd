@@ -44,4 +44,15 @@ select_model(
   seed = 123,
   do_parallel = FALSE
 )
+
+# With a user-defined model evaluation criterion function
+rsquared <- function(lm) {
+  mod <- summary(lm)
+  return(-mod\\$r.squared)
+}
+ga <- select_model(data = airquality,
+                   yvar = "Ozone",
+                   model = "lm",
+                   criterion = "rsquared",
+                   criterion_function = rsquared)
 }
