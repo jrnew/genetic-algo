@@ -16,6 +16,17 @@ x4 <- runif(n, 0.8, 1)
 data <- data.frame(x1 = x1, x2 = x2, x3 = rnorm(n), x4 = x4, x5 = rnorm(n), 
                    y = x1 + 0.5*x2 + 1.7*x4)
 
+# Examples
+rsquared <- function(lm) {
+  mod <- summary(lm)
+  return(-mod$r.squared)
+}
+ga <- select_model(data = data,
+                   yvar = "y",
+                   model = "lm",
+                   criterion = "rsquared",
+                   criterion_function = rsquared)
+
 system.time({
   ga <- select_model(data = data,
                      yvar = "y",
@@ -23,6 +34,7 @@ system.time({
                      model = "lm",
                      glm_family = NULL,
                      criterion = "AIC",
+                     criterion_function = NULL,
                      pop_size = 100L,
                      method_select = "rank",
                      method_recombine = "onepoint",
@@ -44,7 +56,3 @@ plot(ga)
 # mod <- lm(y ~ ., data)
 # library(MASS)
 # stepAIC(mod)
-# stepAIC(mod, k = log(n)) # BIC
-
-
-
