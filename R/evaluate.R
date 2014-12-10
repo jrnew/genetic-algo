@@ -10,7 +10,10 @@
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
-#' @param criterion "AIC" (default) or "BIC"; Criterion to be minimized.
+#' @param criterion Character; "AIC" (default), "BIC" or some user-defined criterion; 
+#' Model selection criterion to minimize.
+#' @param criterion_function NULL if criterion is "AIC" or "BIC", user-defined
+#' function in the global environment otherwise.
 #' @param do_parallel Logical; Default FALSE; Do in parallel?
 #' @return Numeric vector; Evaluation values for all chromosomes 
 #' in the current generation.
@@ -20,13 +23,16 @@ evaluate <- function(
   model = "lm",
   glm_family = NULL,
   criterion = "AIC",
+  criterion_function = NULL,
   do_parallel = FALSE
 ) {
   stopifnot(is.matrix(pop))
   stopifnot(all(c(pop) %in% c(0, 1)))
   stopifnot(is.list(model_data))
   stopifnot(model %in% c("lm", "glm"))
-  stopifnot(criterion %in% c("AIC", "BIC"))
+  if (!(criterion %in% c("AIC", "BIC"))) {
+    stopifnot(is.function(criterion_function))
+  }
   stopifnot(is.logical(do_parallel))
   if (model == "glm") {
     stopifnot(!is.null(glm_family))
@@ -35,18 +41,19 @@ evaluate <- function(
                 c("binomial", "gaussian", "Gamma", "inverse.gaussian",
                   "poisson", "quasi", "quasibinomial", "quasipoisson"))
   }
-  
   if (do_parallel) {
     evaluation <- foreach (i = 1:nrow(pop), .combine = c) %dopar%
       evaluate_once(model_data = model_data, 
                     xvars_select = as.logical(pop[i, ]),
-                    model = model, criterion = criterion)
+                    model = model, criterion = criterion, 
+                    criterion_function = criterion_function)
   } else {
     evaluation <- rep(NA, nrow(pop))
     for (i in 1:nrow(pop))
       evaluation[i] <- evaluate_once(model_data = model_data, 
                                      xvars_select = as.logical(pop[i, ]),
-                                     model = model, criterion = criterion)
+                                     model = model, criterion = criterion,
+                                     criterion_function = criterion_function)
   }  
   return(evaluation)
 }
@@ -62,17 +69,23 @@ evaluate <- function(
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
-#' @param criterion "AIC" (default) or "BIC"; AIC or BIC.
+#' @param criterion Character; "AIC" (default), "BIC" or some user-defined criterion; 
+#' Model selection criterion to minimize.
+#' @param criterion_function NULL if criterion is "AIC" or "BIC", user-defined
+#' function in the global environment otherwise.
 #' @return Numeric; Value of criterion.
 evaluate_once <- function(
   model_data,
   xvars_select,
   model = "lm",
   glm_family = NULL,
-  criterion = "AIC"
+  criterion = "AIC",
+  criterion_function = NULL
 ) {
   stopifnot(model %in% c("lm", "glm"))
-  stopifnot(criterion %in% c("AIC", "BIC"))
+  if (!(criterion %in% c("AIC", "BIC"))) {
+    stopifnot(is.function(criterion_function))
+  }
   if (model == "glm") {
     stopifnot(!is.null(glm_family))
     stopifnot(is.character(glm_family))
@@ -94,6 +107,14 @@ evaluate_once <- function(
     result <- AIC(mod)
   } else if (criterion == "BIC") {
     result <- BIC(mod)
+  } else {
+    fun <- function(fun, mod) return(fun(mod))
+    result <- try(fun(criterion_function, mod))
+    if (class(result) == "try-error")
+      stop(paste0("Error in ", criterion_function, ". ",
+                  "Please check that function inputs and outputs are valid."))
+    if (!is.numeric(result))
+      stop(paste0(criterion_function, " does not return a numeric value!"))
   }
   return(result)
 }

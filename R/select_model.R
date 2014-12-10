@@ -12,7 +12,10 @@
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
-#' @param criterion "AIC" (default) or "BIC"; Criterion to be minimized.
+#' @param criterion Character; "AIC" (default), "BIC" or some user-defined criterion; 
+#' Model selection criterion to minimize.
+#' @param criterion_function NULL if criterion is "AIC" or "BIC", user-defined
+#' function in the global environment otherwise.
 #' @param pop_size Integer; Default is 100; Number of chromosomes per generation.
 #' @param method_select String; "rank" (linear rank selection) (default) or
 #' "tournament"; Method to select chromosomes for inclusion in mating pool.
@@ -34,6 +37,7 @@ select_model <- function(
   model = "lm",
   glm_family = NULL,
   criterion = "AIC",
+  criterion_function = NULL,
   pop_size = 100L,
   method_select = "rank",
   method_recombine = "onepoint",
@@ -45,7 +49,9 @@ select_model <- function(
 ) {
   stopifnot(is.data.frame(data))
   stopifnot(model %in% c("lm", "glm"))
-  stopifnot(criterion %in% c("AIC", "BIC"))
+  if (!(criterion %in% c("AIC", "BIC"))) {
+    stopifnot(is.function(criterion_function))
+  }
   stopifnot(is.numeric(pop_size))
   stopifnot(method_select %in% c("rank", "tournament"))
   stopifnot(method_recombine %in% c("onepoint", "twopoint", "uniform"))
@@ -70,6 +76,7 @@ select_model <- function(
   settings <- list(model = model,
                    glm_family = glm_family,
                    criterion = criterion,
+                   criterion_function = criterion_function,
                    pop_size = pop_size,
                    method_select = method_select,
                    method_recombine = method_recombine,
@@ -89,6 +96,7 @@ select_model <- function(
                          model_data = model_data,
                          model = settings$model,
                          criterion = settings$criterion,
+                         criterion_function = settings$criterion_function,
                          do_parallel = do_parallel)
   ga <- list(settings = settings,
              model_data = model_data,

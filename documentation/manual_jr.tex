@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{color, hyperref, amsmath, graphicx, Rd}
+
+\setlength{\oddsidemargin}{0in} \setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{8.5in}
+\setlength{\textwidth}{6.5in} \setlength{\textheight}{8.5in}
+
+\title{STAT 243: \\
+	Model Selection with\\ 
+	Genetic Algorithms using \texttt{ga}}
+\author{Eddie Buehler, Yang Hu \& Jin Rou New\\
+	University of California, Berkeley}
+
+\date{Version 1.0, \today}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{\baselineskip}% to get space between paragraphs
+
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+A genetic algorithm has the following steps: 
+\begin{enumerate}
+	\item Calculate fitness of chromosomes.
+	\item Select chromosomes to form a mating pool based on their fitness.
+	\item Recombine parent chromosomes from the mating pool.
+	\item Apply mutation to produce the resulting generation of chromosomes.
+\end{enumerate}
+
+\section{Code}
+We took the S3 approach to object-oriented programming for our package and created functions that were as modular as possible to facilitate code creation, maintenance and testing.
+
+For a given data set, e.g. the built-in \texttt{airquality} data set in \texttt{R}, the user can carry out model selection based on the Akaike Information Criterion for an ordinary linear regression of the variable \texttt{Ozone} on other variables in the data set with the following command:
+
+\begin{verbatim}
+ga <- select_model(data = airquality, yvar = "Ozone")
+\end{verbatim}
+
+Finer control of other parameters in the genetic algorithm 
+\begin{verbatim}
+ga <- select_model(data = airquality, yvar = "Ozone", xvars = NULL,
+	model = "lm", glm_family = NULL, criterion = "AIC",
+	pop_size = 100, method_select = "rank",
+	method_recombine = "onepoint", prob_recombine = 0.6,
+	prob_mutate = 0.01, num_max_iterations = 100,
+	seed = 123, do_parallel = FALSE)
+\end{verbatim}
+
+The output of the results can be viewed using the following commands:
+\begin{verbatim}
+summary(ga)
+model(ga)
+\end{verbatim}
+
+The result of this function is an object of \texttt{ga} class that contains the settings, model data, final population of chromosomes/models, model evaluation values of this population and results of model selection using the genetic algorithm.
+
+\subsection{reproduce function}
+
+\subsection{reproduce function}
+
+\section{Testing} 
+
+\section{Contributions} 
+\subsection{Code writing}
+General structure: Jin Rou New
+Functions:
+
+\subsection{Code testing}
+Function testing: Eddie Buehler
+Overall function tests: Yang Hu
+
+\subsection{Documentation}
+Manual creation: Eddie Buehler
+Project write-up: All
+
+\section{Appendix}
+\input{overviewallfunctions.tex}
+
+\end{document}

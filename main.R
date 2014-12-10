@@ -15,6 +15,7 @@ x2 <- runif(n, -5, -4)
 x4 <- runif(n, 0.8, 1)
 data <- data.frame(x1 = x1, x2 = x2, x3 = rnorm(n), x4 = x4, x5 = rnorm(n), 
                    y = x1 + 0.5*x2 + 1.7*x4)
+
 system.time({
   ga <- select_model(data = data,
                      yvar = "y",

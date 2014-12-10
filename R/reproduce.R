@@ -38,6 +38,7 @@ reproduce <- function(
                                model = ga$settings$model,
                                glm_family = ga$settings$glm_family,
                                criterion = ga$settings$criterion,
+                               criterion_function = ga$settings$criterion_function,
                                do_parallel = do_parallel)
   ga$evaluation <- evaluation_child
   # Save only the first "best" model as there may be multiple "best" models
