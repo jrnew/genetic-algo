@@ -11,7 +11,7 @@ reproduce <- function(
   do_parallel = FALSE
 ) {
   stopifnot(class(ga) == "ga")
-  stopifnot(is.integer(iteration))
+  stopifnot(is.numeric(iteration))
   stopifnot(iteration > 0)
   stopifnot(is.logical(do_parallel))
   

@@ -19,7 +19,7 @@ recombine <- function(
 ) {
   stopifnot(is.matrix(pop_mating))
   stopifnot(all(c(pop_mating) %in% c(0, 1)))
-  stopifnot(is.integer(pop_size))
+  stopifnot(is.numeric(pop_size))
   stopifnot(method %in% c("onepoint", "twopoint", "uniform"))
   stopifnot(is.logical(do_parallel))
   stopifnot(is.numeric(prob_recombine))
