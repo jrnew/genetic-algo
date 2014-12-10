@@ -12,7 +12,7 @@ plot.ga <- function(
   num_view = 3
 ) {
   stopifnot(class(ga) == "ga")
-  stopifnot(is.integer(num_view))
+  stopifnot(is.numeric(num_view))
   
   generation <- 1:ga$settings$num_max_iterations
   outliers <- boxplot(ga$log$evaluation_best)$out
