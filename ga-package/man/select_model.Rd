@@ -3,10 +3,10 @@
 \alias{select_model}
 \title{Carry out model selection with a genetic algorithm.}
 \usage{
-select_model(data, yvar, xvars = NULL, model = "lm", criterion = "AIC",
-  pop_size = 100L, method_select = "rank", method_recombine = "onepoint",
-  prob_recombine = 0.6, prob_mutate = 0.01, num_max_iterations = 100L,
-  seed = 123, do_parallel = FALSE)
+select_model(data, yvar, xvars = NULL, model = "lm", glm_family = NULL,
+  criterion = "AIC", pop_size = 100L, method_select = "rank",
+  method_recombine = "onepoint", prob_recombine = 0.6, prob_mutate = 0.01,
+  num_max_iterations = 100L, seed = 123, do_parallel = FALSE)
 }
 \arguments{
 \item{data}{Data frame}
@@ -18,6 +18,11 @@ Name(s) of column(s) containing set of explanatory variables to select on.}
 
 \item{model}{Character; "lm" (default) or "glm"; Linear model or
 generalized linear model.}
+
+\item{glm_family}{Character if model is "glm", NULL otherwise;
+"binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
+"quasibinomial", "quasipoisson"; A family function that gives the error
+distribution and link function to be used in the model.}
 
 \item{criterion}{"AIC" (default) or "BIC"; Criterion to be minimized.}
 
@@ -42,11 +47,6 @@ Maximum number of iterations before algorithm is stopped.}
 for reproducibility.}
 
 \item{do_parallel}{Logical; Default is FALSE; Do in parallel?}
-
-\item{glm_family}{Character if model is "glm", NULL otherwise;
-"binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
-"quasibinomial", "quasipoisson"; A family function that gives the error
-distribution and link function to be used in the model.}
 }
 \description{
 Main function for carrying out model selection with a genetic algorithm.

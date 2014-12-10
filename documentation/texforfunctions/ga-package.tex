@@ -1,33 +1,35 @@
-\name{GA-package}
-\alias{GA-package}
-\alias{GA-package}
-\docType{package}
-\title{
-Genetic algorithm for model variable selection
-}
-\description{
+\inputencoding{utf8}
+\HeaderA{GA-package}{Genetic algorithm for model variable selection}{GA.Rdash.package}
+\keyword{package}{GA-package}
+%
+\begin{Description}\relax
 Final project for Statistics 243. An R package that implements a genetic algorithm for variable selection in linear and GLM problems.
-}
-\details{
-\tabular{ll}{
-Package: \tab GA-package\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-12-13\cr
-}
-}
-\author{
-Eddie Buehler, Yang Hu, JR New
-}
-\references{
-G. Givens and J. Hoeting. \strong{Computational Statistics, 2nd ed.} (2012).
-}
+\end{Description}
+%
+\begin{Details}\relax
 
-\keyword{ package }
-\seealso{
-https://github.com/jrnew/genetic-algo
+\Tabular{ll}{
+Package: & GA-package\\{}
+Type: & Package\\{}
+Version: & 1.0\\{}
+Date: & 2014-12-13\\{}
 }
-\examples{
+\end{Details}
+%
+\begin{Author}\relax
+Eddie Buehler, Yang Hu, JR New
+\end{Author}
+%
+\begin{References}\relax
+G. Givens and J. Hoeting. \strong{Computational Statistics, 2nd ed.} (2012).
+\end{References}
+%
+\begin{SeeAlso}\relax
+https://github.com/jrnew/genetic-algo
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
 # Select regression variables for airquality data using lm model and AIC criterion
 select_model(
   data = airquality,
@@ -44,4 +46,5 @@ select_model(
   seed = 123,
   do_parallel = FALSE
 )
-}
+\end{ExampleCode}
+\end{Examples}

@@ -8,7 +8,8 @@ initialize(pop_size, num_vars)
 \arguments{
 \item{pop_size}{Non-negative integer; Number of chromosomes in population.}
 
-\item{num_vars}{Non-negative integer; Number of variables in model under consideration/number of genes in each chromosome.}
+\item{num_vars}{Non-negative integer; Number of variables in model under consideration/
+number of genes in each chromosome.}
 }
 \value{
 A matrix of size pop_size x num_vars with 1's and 0's.

@@ -7,18 +7,18 @@ evaluate_once(model_data, xvars_select, model = "lm", glm_family = NULL,
   criterion = "AIC")
 }
 \arguments{
+\item{model}{Character; "lm" (default) or "glm"; Linear model or generalized linear model.}
+
 \item{glm_family}{Character if model is "glm", NULL otherwise;
 "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 "quasibinomial", "quasipoisson"; A family function that gives the error
 distribution and link function to be used in the model.}
 
+\item{criterion}{"AIC" (default) or "BIC"; AIC or BIC.}
+
 \item{model_data;}{Object of class model_data.}
 
 \item{xvars_select;}{Logical vector;}
-
-\item{model;}{Character; "lm" (default) or "glm"; Linear model or generalized linear model.}
-
-\item{criterion;}{"AIC" (default) or "BIC"; AIC or BIC.}
 }
 \value{
 Numeric; Value of criterion.

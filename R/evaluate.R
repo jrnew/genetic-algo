@@ -57,12 +57,12 @@ evaluate <- function(
 #' 
 #' @param model_data; Object of class model_data.
 #' @param xvars_select; Logical vector; 
-#' @param model; Character; "lm" (default) or "glm"; Linear model or generalized linear model.
+#' @param model Character; "lm" (default) or "glm"; Linear model or generalized linear model.
 #' @param glm_family Character if model is "glm", NULL otherwise; 
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
-#' @param criterion; "AIC" (default) or "BIC"; AIC or BIC.
+#' @param criterion "AIC" (default) or "BIC"; AIC or BIC.
 #' @return Numeric; Value of criterion.
 evaluate_once <- function(
   model_data,

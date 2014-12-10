@@ -14,7 +14,7 @@ process_data(data, yvar, xvars = NULL)
 Name(s) of column(s) containing set of explanatory variables to select on.}
 }
 \value{
-A list object named \code{model_data} containing:
+A list object named model_data containing:
 \describe{
   \item{data}{Data frame; Processed data with only relevant columns.}
   \item{yvar}{Character; Name of column containing response variable.}
