@@ -63,7 +63,7 @@ select_model <- function(
   stopifnot(num_max_iterations >= 10)
   stopifnot(is.logical(do_parallel))
   if (model == "glm") {
-    stopifnot(!is.null(glm_family))
+    stopifnot(is.null(glm_family))
     stopifnot(is.character(glm_family))
     stopifnot(glm_family %in%
                 c("binomial", "gaussian", "Gamma", "inverse.gaussian",
