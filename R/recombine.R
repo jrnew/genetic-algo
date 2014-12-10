@@ -8,7 +8,7 @@
 #' Type of crossover, at one point, at two points or uniformly (at all possible points).
 #' @param prob_recombine Numeric, between 0 and 1; Default is 0.6; 
 #' Probability of recombination.
-#' @param do_parallel Logical; Default \code{FALSE}; Do in parallel?
+#' @param do_parallel Logical; Default FALSE; Do in parallel?
 #' @return Matrix of population of chromosomes resulting from recombination.
 recombine <- function(
   pop_mating,

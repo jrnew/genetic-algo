@@ -2,7 +2,7 @@
 #' 
 #' Outputs the top models selected from the genetic algorithm.
 #' 
-#' @param ga Object of class \code{ga}.
+#' @param ga Object of class ga.
 #' @param num_view Number of top models to display.
 #' @return Prints summary of top models and associated value of 
 #' model selection criterion.

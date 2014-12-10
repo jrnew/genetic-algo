@@ -2,9 +2,9 @@
 #' 
 #' Wrapper function for reproduction stage.
 #' 
-#' @param ga Object of class \code{ga}.
+#' @param ga Object of class ga.
 #' @param iteration Iteration number.
-#' @return Updated \code{ga} list object.
+#' @return Updated ga list object.
 reproduce <- function(
   ga,
   iteration,

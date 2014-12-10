@@ -8,7 +8,7 @@
 #' Name(s) of column(s) containing set of explanatory variables to select on.
 #' @param model Character; "lm" (default) or "glm"; Linear model or 
 #' generalized linear model.
-#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' @param glm_family Character if model is "glm", NULL otherwise; 
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
@@ -26,7 +26,7 @@
 #' Maximum number of iterations before algorithm is stopped.
 #' @param seed Non-negative integer; Default is 123; Random seed 
 #' for reproducibility.
-#' @param do_parallel Logical; Default is \code{FALSE}; Do in parallel?
+#' @param do_parallel Logical; Default is FALSE; Do in parallel?
 select_model <- function(
   data,
   yvar,

@@ -6,7 +6,7 @@
 #' @param evaluation Numeric vector; Evaluation values of all chromosomes in population.
 #' @param method String; "rank" (linear rank selection) (default) or
 #' "tournament"; Method to select chromosomes for inclusion in mating pool.
-#' @param do_parallel Logical; Default \code{FALSE}; Do in parallel?
+#' @param do_parallel Logical; Default FALSE; Do in parallel?
 #' @return Matrix of population of chromosomes that form the mating pool.
 select <- function(
   pop,

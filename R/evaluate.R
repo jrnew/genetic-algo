@@ -3,15 +3,15 @@
 #' Do evaluation for chromosomes in population by calculating model selection criterion.
 #' 
 #' @param pop Matrix of population of chromosomes.
-#' @param model_data Object of class \code{model_data}.
+#' @param model_data Object of class model_data.
 #' @param model Character; "lm" (default) or "glm"; Linear model or 
 #' generalized linear model.
-#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' @param glm_family Character if model is "glm", NULL otherwise; 
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.
 #' @param criterion "AIC" (default) or "BIC"; Criterion to be minimized.
-#' @param do_parallel Logical; Default \code{FALSE}; Do in parallel?
+#' @param do_parallel Logical; Default FALSE; Do in parallel?
 #' @return Numeric vector; Evaluation values for all chromosomes 
 #' in the current generation.
 evaluate <- function(
@@ -55,10 +55,10 @@ evaluate <- function(
 #' 
 #' Do evaluation for a chromosome by calculating model selection criterion.
 #' 
-#' @param model_data; Object of class \code{model_data}.
+#' @param model_data; Object of class model_data.
 #' @param xvars_select; Logical vector; 
 #' @param model; Character; "lm" (default) or "glm"; Linear model or generalized linear model.
-#' @param glm_family Character if \code{model} is "glm", \code{NULL} otherwise; 
+#' @param glm_family Character if model is "glm", NULL otherwise; 
 #' "binomial", "gaussian" (default), "Gamma", "inverse.gaussian", "poisson", "quasi",
 #' "quasibinomial", "quasipoisson"; A family function that gives the error 
 #' distribution and link function to be used in the model.

@@ -6,13 +6,13 @@
 #' @param yvar Character; Name of column containing response variable.
 #' @param xvars Character vector; Default is all column names that are not yvar;
 #' Name(s) of column(s) containing set of explanatory variables to select on.
-#' @return A list object named \code{model_data} containing:
+#' @return A list object named model_data containing:
 #' \describe{
-#'   \item{\code{data}}{Data frame; Processed data with only relevant columns.}
-#'   \item{\code{yvar}}{Character; Name of column containing response variable.}
-#'   \item{\code{xvars}}{Character vector; Name(s) of column(s) containing 
+#'   \item{data}{Data frame; Processed data with only relevant columns.}
+#'   \item{yvar}{Character; Name of column containing response variable.}
+#'   \item{xvars}{Character vector; Name(s) of column(s) containing 
 #'   set of explanatory variables to select on.}
-#'   \item{\code{num_vars}}{Integer; Length of xvars.}   
+#'   \item{num_vars}{Integer; Length of xvars.}   
 #' } 
 process_data <- function(
   data,
