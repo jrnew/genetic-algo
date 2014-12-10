@@ -54,4 +54,23 @@ qqnorm(residuals(mod))
 qqline(residuals(mod))
 #plot looks good.
 
+#Testing for the summary function
+data <- as.data.frame(trancSFO)
+yvar <- "ArrDelay"
+pop_size <- min(nrow(data)*2, 200)
+xvars <- c( "Month", "DayofMonth", "DayofWeek", "DepTime", 
+            "CRSDepTime", "ArrTime", "CRSArrTime", 
+            "FlightNum", "TailNum", "ActualElapsedTime", "CRSElaspsedTime", 
+            "AirTime", "DepDelay", "Origin", "Distane","TaxiIn",
+            "TaxiOut", "NASDelay")
+ga <- select_model(data,yvar = yvar, xvars = xvars ,num_max_iterations = 10L, seed = 100)
+summary_ga(ga)
+summary_ga(ga,num_view = 12)
+
+data <- berkhousing
+yvar <- "price"
+xvars <- c("tax","sqft","built")
+pop_size <- min(nrow(data)*2, 200)
+ga <- select_model(data,yvar = yvar, xvars = xvars, num_max_iterations = 10L)
+summary_ga(ga)
 
