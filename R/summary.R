@@ -23,7 +23,7 @@ summary.ga <- function(
     top_models <- models[rank, ][1:num_view, ]
     top_evaluation <- sort(evaluation)[1:num_view]
     for (i in 1:num_view) {
-      x <- ga$model_data$xvars[top_models[i, ] == 1]
+      x <- ga$model_data$xvars[top_models[i] == 1]
       y <- ga$model_data$yvar
       xvars <- paste(x, collapse = " + ")
       cat("Model", i, ":\n",
