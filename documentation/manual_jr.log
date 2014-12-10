@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.8.27)  9 DEC 2014 17:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.8.27)  9 DEC 2014 19:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -570,15 +570,23 @@ e
 [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+ [2] [3]
 (./overviewallfunctions.tex (./texforfunctions/ga-package.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [2]
+) [4]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 2.
 
-[3]) (./texforfunctions/select_model.tex
+[5]) (./texforfunctions/select_model.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -587,7 +595,7 @@ Overfull \hbox (34.2344pt too wide) in paragraph at lines 29--33
 qua-si-b-i-no-mial", "quasipois-
  []
 
-[4]) (./texforfunctions/evaluate_once.tex
+[6]) (./texforfunctions/evaluate_once.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -596,7 +604,7 @@ Overfull \hbox (34.2344pt too wide) in paragraph at lines 19--23
 qua-si-b-i-no-mial", "quasipois-
  []
 
-[5]) (./texforfunctions/evaluate.tex
+[7]) (./texforfunctions/evaluate.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -605,18 +613,18 @@ Overfull \hbox (34.2344pt too wide) in paragraph at lines 24--28
 qua-si-b-i-no-mial", "quasipois-
  []
 
-[6]) (./texforfunctions/initialize.tex
+[8]) (./texforfunctions/initialize.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 ))
 (./texforfunctions/mutate.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [7])
+) [9])
 (./texforfunctions/plot.ga.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [8])
+) [10])
 (./texforfunctions/process_data.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -624,11 +632,11 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (./texforfunctions/recombine_once.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [9])
+) [11])
 (./texforfunctions/recombine.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [10])
+) [12])
 (./texforfunctions/reproduce.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -636,43 +644,51 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (./texforfunctions/select.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [11])
+) [13])
 (./texforfunctions/summary.ga.tex
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [12]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 82.
- [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 82.
+) [14]))
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 119.
+ [15]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
 
 (./manual_jr.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 82.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 82.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 119.
 Package rerunfilecheck Info: File `manual_jr.out' has not changed.
-(rerunfilecheck)             Checksum: F848F92B6B815A299EC09FD4868AB0F3;1285.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
+(rerunfilecheck)             Checksum: 4E82241C9E13FEDCADC69E11C964A8AA;1150.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 119.
  ) 
 Here is how much of TeX's memory you used:
- 6483 strings out of 493117
- 93481 string characters out of 6135433
- 182067 words of memory out of 5000000
- 9708 multiletter control sequences out of 15000+600000
- 13945 words of font info for 50 fonts, out of 8000000 for 9000
+ 6516 strings out of 493117
+ 93941 string characters out of 6135433
+ 182193 words of memory out of 5000000
+ 9727 multiletter control sequences out of 15000+600000
+ 14281 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,6n,28p,327b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,10n,28p,656b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loc
-al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on manual_jr.pdf (13 pages, 140348 bytes).
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on manual_jr.pdf (15 pages, 209019 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 83 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 267 compressed objects within 3 object streams
+ 93 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -8,7 +8,7 @@
 
 \title{STAT 243: \\
 	Model Selection with\\ 
-	Genetic Algorithms using \texttt{ga}}
+	Genetic Algorithms using \texttt{GA}}
 \author{Eddie Buehler, Yang Hu \& Jin Rou New\\
 	University of California, Berkeley}
 
@@ -22,6 +22,7 @@
 \maketitle
 
 \section{Introduction}
+\label{sec:introduction}
 A genetic algorithm has the following steps: 
 \begin{enumerate}
 	\item Calculate fitness of chromosomes.
@@ -31,23 +32,15 @@ A genetic algorithm has the following steps:
 \end{enumerate}
 
 \section{Code}
+\label{sec:code}
 We took the S3 approach to object-oriented programming for our package and created functions that were as modular as possible to facilitate code creation, maintenance and testing.
 
-For a given data set, e.g. the built-in \texttt{airquality} data set in \texttt{R}, the user can carry out model selection based on the Akaike Information Criterion for an ordinary linear regression of the variable \texttt{Ozone} on other variables in the data set with the following command:
-
+For a given data set, e.g. the built-in \texttt{airquality} data set in \texttt{R}, the user can carry out model selection for an ordinary linear regression of the variable \texttt{Ozone} on other variables in the data set with the main function in the package as follows:
 \begin{verbatim}
 ga <- select_model(data = airquality, yvar = "Ozone")
 \end{verbatim}
 
-Finer control of other parameters in the genetic algorithm 
-\begin{verbatim}
-ga <- select_model(data = airquality, yvar = "Ozone", xvars = NULL,
-	model = "lm", glm_family = NULL, criterion = "AIC",
-	pop_size = 100, method_select = "rank",
-	method_recombine = "onepoint", prob_recombine = 0.6,
-	prob_mutate = 0.01, num_max_iterations = 100,
-	seed = 123, do_parallel = FALSE)
-\end{verbatim}
+Finer control of other parameters in the genetic algorithm for model selection is possible by changing the other function arguments. More details can be found in the \texttt{GA} manual in the ~\nameref{sec:appendix}.
 
 The output of the results can be viewed using the following commands:
 \begin{verbatim}
@@ -55,28 +48,72 @@ summary(ga)
 model(ga)
 \end{verbatim}
 
-The result of this function is an object of \texttt{ga} class that contains the settings, model data, final population of chromosomes/models, model evaluation values of this population and results of model selection using the genetic algorithm.
+The result of this function is an object of \texttt{GA} class that contains the settings, model data, final population of chromosomes/models, model evaluation values of this population and all results of model selection using the genetic algorithm.
 
-\subsection{reproduce function}
+In the genetic algorithmic approach to model selection, a population of models, i.e. chromosomes with number of genes equal to the number of model variables under consideration, and with each gene taking a value of 1 if the model variable is included and 0 otherwise, is first initialized. This population then undergoes many iterations of reproduction. In the reproduction stage, each model/chromosome is then evaluated based on the desired model selection criterion, e.g. Akaike's Information Criterion. Chromosomes are then selected into the mating pool based on how well they perform on the model selection criterion. 
 
-\subsection{reproduce function}
+Next, 2 parent chromosomes are randomly selected from the mating pool to form a child chromosome, with some probability of recombination/crossover occurring in the process. This is repeated until the desired number of child chromosomes for the next generation is reached. Finally, mutation is applied with a low probability to each gene in the population of child chromosomes. The resulting population of child chromosomes forms the next generation. The whole process is repeated for a desired number of iterations. The model/chromosome with the minimum value of the model evaluation criterion across all generations is then the best model.
+
+The following subsections elaborate on the main subfunctions in the \texttt{GA} package; for more detailed documentation, please refer to the \texttt{GA} manual in the ~\nameref{sec:appendix}.
+
+\subsection*{initialize function}
+We sample uniformly from the set of \{0, 1\} with replacement as many genes as is required, i.e. the product of the number of variables under consideration and the population size desired, for the initial population of chromosomes.
+
+\subsection*{evaluate function}
+We compute the value of the model evaluation criterion for every model/chromosome in the population. The default model evaluation criterion is Akaike Information Criterion (AIC). The user can also choose to use Bayesian Information Criterion (BIC) or define his/her own function.
+
+\subsection*{select function}
+The default selection method is ``rank'', which refers to Linear Rank Selection (LRS). In LRS, chromosomes are first given ranks $r_i$ for $i = 1, ..., n$, where $n$ is the number of chromosomes in the population. The chromosome with the best (minimum) model evaluation criterion is assigned a rank of $n$. Chromosomes are then selected into the mating pool randomly with probability proportional to their relative rank, until the desired size of the mating pool is reached. This is done with the following algorithm:
+\begin{enumerate}
+\item Calculate for each chromosome its probability to be selected, $p_i = \frac{r_i}{\sum\limits_{i=1}^n{r_i}}$. Since the best chromosome is given the largest rank, it also has a highest probability of being selected.
+\item Calculate the cumulative probability for each chromosome to be selected, $pc_i = \sum\limits_{j=1}^i{p_j}$.
+\item Generate a random number $u$ uniformly in the range [0, 1].
+\item Select the chromosome with index $i$ if $pc_i < u < pc_{i+1}$
+\item Repeat until the desired number of chromosomes in the mating pool is select.
+\end{enumerate}
+
+The alternative selection method is ``tournament'', which refers to Tournament Selection. The idea is simple; in Tournament Selection, we randomly select 2 chromosomes from the population. The chromosome with the better model evaluation criterion is selected into the mating pool. This process is repeated (with replacement of both chromosomes each time) until the desired number of chromosomes in the mating pool is reached.
+
+\subsection*{recombine function}
+Recombination occurs with probability \texttt{prob\_recombine} for every set of 2 parent chromosomes; the child chromosome is simply a copy of the first parent chromosome if no recombination occurs. We implemented three methods of recombination: crossover at one point (``onepoint''), crossover at two points (``twopoint'') and uniform crossover (``uniform'').
+
+For one-point crossover, a break point index $b$ is uniformly sampled from the set of \{1, ..., g\}, where $g$ is the number of genes on each chromosome. The resulting child chromosome then takes genes 1 to $b$ from the first parent and genes $b+1$ to $g$ from the second parent.
+
+For two-point crossover, two break point indices $b_1$ and $b_2$ are uniformly sampled without replacement from the set of \{1, ..., g\}. The resulting child chromosome then takes genes 1 to $b_1$ from the first parent, genes $b_1+1$ to $b_2$ from the second parent, and finally genes $b_2+1$ to $g$ from the first parent.
+
+For uniform crossover, the child chromosome has equal probability of receiving each gene from either parent.
+
+\subsection*{mutate function}
+We generate as many Bernoulli variables as there are genes in the population of chromosomes. For each gene, we set:
+
+\[
+\text{new\_gene} \sim
+\begin{cases}
+Bernoulli(\texttt{prob\_mutate}), & \text{if current\_gene = 0}\\
+Bernoulli(1-\texttt{prob\_mutate}), & \text{if current\_gene = 1}
+\end{cases}
+\]
+
+This is equivalent to mutating each gene (i.e. changing a value of 1 to 0 and vice versa) with a probability of \texttt{prob\_mutate}, but doing it in this manner allows for vectorized operations.
 
 \section{Testing} 
 
 \section{Contributions} 
+\label{sec:contributions}
 \subsection{Code writing}
-General structure: Jin Rou New
-Functions:
+General structure: JRN\\
+Functions: JRN, YH
 
 \subsection{Code testing}
-Function testing: Eddie Buehler
-Overall function tests: Yang Hu
+Function testing: EB\\
+Overall function tests: YH
 
 \subsection{Documentation}
-Manual creation: Eddie Buehler
-Project write-up: All
+Manual creation: EB\\
+Project write-up: Introduction (EB), Code (JRN), Testing (EB, YH)
 
 \section{Appendix}
+\label{sec:appendix}
 \input{overviewallfunctions.tex}
 
 \end{document}
