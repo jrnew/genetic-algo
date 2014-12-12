@@ -100,7 +100,7 @@ function. A genetic algorithm has the following steps:
 
 \section{Code}
 \label{sec:code}
-We took the S3 approach to object-oriented programming for our package and created functions that were as modular as possible to facilitate code creation, maintenance and testing.
+We took the S3 approach to object-oriented programming for our package and created functions that were as modular as possible to facilitate code creation, maintenance, and testing.
 
 For a given data set, e.g. the built-in \texttt{airquality} data set in \texttt{R}, the user can carry out model selection for an ordinary linear regression of the variable \texttt{Ozone} on other variables in the data set with the main function in the package as follows:
 \begin{verbatim}
@@ -136,13 +136,13 @@ The default selection method is ``rank'', which refers to Linear Rank Selection 
 \item Calculate the cumulative probability for each chromosome to be selected, $pc_i = \sum\limits_{j=1}^i{p_j}$.
 \item Generate a random number $u$ uniformly in the range [0, 1].
 \item Select the chromosome with index $i$ if $pc_i < u < pc_{i+1}$
-\item Repeat until the desired number of chromosomes in the mating pool is select.
+\item Repeat until the desired number of chromosomes in the mating pool is selected.
 \end{enumerate}
 
 The alternative selection method is ``tournament'', which refers to Tournament Selection. The idea is simple; in Tournament Selection, we randomly select 2 chromosomes from the population. The chromosome with the better model evaluation criterion is selected into the mating pool. This process is repeated (with replacement of both chromosomes each time) until the desired number of chromosomes in the mating pool is reached.
 
 \subsection*{recombine function}
-Recombination occurs with probability \texttt{prob\_recombine} for every set of 2 parent chromosomes; the child chromosome is simply a copy of the first parent chromosome if no recombination occurs. We implemented three methods of recombination: crossover at one point (``onepoint''), crossover at two points (``twopoint'') and uniform crossover (``uniform'').
+Recombination occurs with probability \texttt{prob\_recombine} for every set of 2 parent chromosomes; the child chromosome is simply a copy of the first parent chromosome if no recombination occurs. We implemented three methods of recombination: crossover at one point (``onepoint''), crossover at two points (``twopoint''), and uniform crossover (``uniform'').
 
 For one-point crossover, a break point index $b$ is uniformly sampled from the set of \{1, ..., g\}, where $g$ is the number of genes on each chromosome. The resulting child chromosome then takes genes 1 to $b$ from the first parent and genes $b+1$ to $g$ from the second parent.
 
@@ -190,10 +190,10 @@ ensure proper behavior in the \texttt{mutate} function.
 A testing function was written for each function in the \texttt{ga}
 package. These files can be found in the ~/testing folder of the
 Github repository. All testing files can be run at once using the
-\texttt{test\_dir(``~/testing'')} command in R.
+\texttt{test\_dir(`` $\sim$/testing'')} command in R.
 
 After ensuring that each function takes proper inputs and returns desired outputs,
-each method were also tested using small data sets to see if they functions properly.
+each method was also tested using small data sets to see if they functions properly.
 In order to test the functionality of our genetic algorithm, we employed a larger, more 
 realistic data set. We compared the models selected using our genetic algorithim with a 
 well-known model selection method, the stepwise model selection using AIC, 
@@ -202,7 +202,7 @@ implemented in R in the \texttt{stepAIC} function available in the
 
 This data set was obtained from surveys about how video games 
 affect grades. There are 15 variables in the data set -- time (number of 
-hours play), like (whether like to play), where (where to play), freq (how 
+hours played), like (whether like to play), where (where to play), freq (how 
 often), busy (play if busy), educ (playing educational), sex, age, home 
 (computer at home), math (hate math), work (number of hours work per weeek), 
 own (own PC), cdrom (PC has CD-rom), email (have Email) and grade. The 
