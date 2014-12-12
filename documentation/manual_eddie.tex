@@ -216,7 +216,7 @@ The following results are obtained using our genetic algorithim.
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{data} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"../data/video.txt"}\hlstd{,} \hlkwc{header} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{quote} \hlstd{=} \hlstr{"\textbackslash{}""}\hlstd{)}
-\hlstd{ga} \hlkwb{<-} \hlkwd{select_model}\hlstd{(data,}
+\hlstd{ga} \hlkwb{<-} \hlkwd{select}\hlstd{(data,}
                    \hlkwc{yvar} \hlstd{=} \hlstr{"grade"}\hlstd{,}
                    \hlkwc{pop_size} \hlstd{=} \hlkwd{nrow}\hlstd{(data)}\hlopt{*}\hlnum{2}\hlstd{,}
                    \hlkwc{num_max_iterations} \hlstd{=} \hlnum{50}\hlstd{,}
