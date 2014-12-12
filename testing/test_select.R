@@ -2,7 +2,7 @@ context("Selection")
 source("../R/evaluate.R")
 source("../R/process_data.R")
 source("../R/initialize.R")
-source("../R/select.R")
+source("../R/select_for_mating.R")
 
 #Initialize population
 pop_size <- 100
@@ -25,7 +25,7 @@ eval<-evaluate(pop,model_data = model_data,
                      model = "lm", criterion = "AIC")
 
 #select chromosomes for recombination
-pick<- select(
+pick<- select_for_mating(
   pop,
   evaluation=eval,
   method = "rank",

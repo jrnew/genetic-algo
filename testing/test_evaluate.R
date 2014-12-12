@@ -26,7 +26,7 @@ lmaic<-evaluate_once(model_data = model_data,
 
 glmaic<-evaluate_once(model_data = model_data, 
                      xvars_select = as.logical(c(1, 0, 1, 0, 1)),
-                     model = "glm", criterion = "AIC")
+                     model = "glm", glm_family="gaussian",criterion = "AIC")
 
 lmbic<-evaluate_once(model_data = model_data, 
                      xvars_select = as.logical(c(1, 0, 1, 0, 1)),
@@ -34,7 +34,7 @@ lmbic<-evaluate_once(model_data = model_data,
 
 glmbic<-evaluate_once(model_data = model_data, 
                      xvars_select = as.logical(c(1, 0, 1, 0, 1)),
-                     model = "glm", criterion = "BIC")
+                     model = "glm", glm_family="gaussian",criterion = "BIC")
 
 test_that("Output type", {
   
