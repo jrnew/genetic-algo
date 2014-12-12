@@ -16,10 +16,10 @@ reproduce <- function(
   stopifnot(is.logical(do_parallel))
   
   # Create mating pool
-  pop_mating <- select(pop = ga$pop, 
-                       evaluation = ga$evaluation,
-                       method = ga$settings$method_select,
-                       do_parallel = do_parallel)
+  pop_mating <- select_for_mating(pop = ga$pop, 
+                                  evaluation = ga$evaluation,
+                                  method = ga$settings$method_select,
+                                  do_parallel = do_parallel)
   # Do recombination/crossover
   pop_recombined <- recombine(pop_mating = pop_mating,
                               pop_size = ga$settings$pop_size,
