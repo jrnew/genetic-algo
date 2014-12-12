@@ -1,4 +1,16 @@
 # Load all libraries
+if (!require(doParallel)) {
+  install.packages("doParallel")
+}
+if (!require(foreach)) {
+  install.packages("foreach")
+}
+if (!require(MASS)) {
+  install.packages("MASS")
+}
+if (!require(testthat)) {
+  install.packages("testthat")
+}
 library(doParallel)
 library(foreach)
 library(MASS)
@@ -605,4 +617,28 @@ summary.ga <- function(
   }
   return(res)
 }
+
+#' Testing function.
+#' 
+#' Conduct unit tests and compare output of test data with output of stepAIC function.
+#' 
+#' @return Prints summary of top models and associated value of 
+#' model selection criterion.
+test <- function() {
+  test_dir("testing")
+  data <- read.table("data/video.txt", header = TRUE, quote = "\"")
+  ga <- select(data, 
+               yvar = "grade",
+               pop_size = nrow(data)*2,
+               num_max_iterations = 50, 
+               model = "glm",
+               glm_family = "gaussian")
+  res <- summary(ga)
+  plot(ga)
+  mod <- glm(grade ~ ., data = data) 
+  res_step <- stepAIC(mod)
+  cat("Testing done!\n")
+  return(invisible())
+}
+
 

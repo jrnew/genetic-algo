@@ -7,7 +7,7 @@
 \BOOKMARK [2][-]{subsection.4.3}{Documentation}{section.4}% 7
 \BOOKMARK [1][-]{section.5}{Appendix}{}% 8
 \BOOKMARK [2][-]{section*.6}{GA-package}{section.5}% 9
-\BOOKMARK [2][-]{section*.12}{select\137model}{section.5}% 10
+\BOOKMARK [2][-]{section*.12}{select}{section.5}% 10
 \BOOKMARK [2][-]{section*.15}{evaluate\137once}{section.5}% 11
 \BOOKMARK [2][-]{section*.19}{evaluate}{section.5}% 12
 \BOOKMARK [2][-]{section*.23}{initialize}{section.5}% 13
@@ -17,5 +17,5 @@
 \BOOKMARK [2][-]{section*.39}{recombine\137once}{section.5}% 17
 \BOOKMARK [2][-]{section*.43}{recombine}{section.5}% 18
 \BOOKMARK [2][-]{section*.47}{reproduce}{section.5}% 19
-\BOOKMARK [2][-]{section*.51}{select}{section.5}% 20
+\BOOKMARK [2][-]{section*.51}{select\137for\137mating}{section.5}% 20
 \BOOKMARK [2][-]{section*.55}{summary.ga}{section.5}% 21

@@ -31,31 +31,29 @@ https://github.com/jrnew/genetic-algo
 \begin{Examples}
 \begin{ExampleCode}
 # Select regression variables for airquality data using lm model and AIC criterion
-select_model(
-  data = airquality,
-  yvar = "Ozone",
-  xvars = NULL,
-  model = "lm",
-  criterion = "AIC",
-  pop_size = 100L,
-  method_select = "rank",
-  method_recombine = "onepoint",
-  prob_recombine = 0.6,
-  prob_mutate = 0.01,
-  num_max_iterations = 100L,
-  seed = 123,
-  do_parallel = FALSE
-)
+ga <- select(data = airquality,
+             yvar = "Ozone",
+             xvars = NULL,
+             model = "lm",
+             criterion = "AIC",
+             pop_size = 100L,
+             method_select = "rank",
+             method_recombine = "onepoint",
+             prob_recombine = 0.6,
+             prob_mutate = 0.01,
+             num_max_iterations = 100L,
+             seed = 123,
+             do_parallel = FALSE)
 
 # With a user-defined model evaluation criterion function
 rsquared <- function(lm) {
   mod <- summary(lm)
   return(-mod\$r.squared)
 }
-ga <- select_model(data = airquality,
-                   yvar = "Ozone",
-                   model = "lm",
-                   criterion = "rsquared",
-                   criterion_function = rsquared)
+ga <- select(data = airquality,
+             yvar = "Ozone",
+             model = "lm",
+             criterion = "rsquared",
+             criterion_function = rsquared)
 \end{ExampleCode}
 \end{Examples}
